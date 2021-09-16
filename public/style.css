@@ -1,0 +1,39 @@
+body{
+    background-color: #FCDEC0;
+    color: #C68B59;
+}
+
+
+nav{
+    background-color: #5C3D2E;
+    color: #C68B59;
+    padding: 30px 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav li{
+    list-style:none;
+
+}
+
+nav li a{
+    color: #C68B59;
+    text-decoration:none;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+nav li a:hover{
+    color: #F037A5;
+}
+nav li a:active{
+    color: #00C1D4;
+}
+
