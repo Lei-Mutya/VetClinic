@@ -4,9 +4,129 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Page- Pet Registration</title>
+    
+    <!--CSS BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="/style.css"> 
+    <!--Forward slash mean it will look inside the public folder for the file style.css
+    -->  
+    <title>Fur and Tails Animal Care Clinic</title>
 </head>
 <body>
+    <nav>
+        <h4>Customer's Page</h4>
+        <ul>
+            <li><a href="/">HOME</a></li>
+            <li><a href="/viewaccount">YOUR ACCOUNT</a></li>
+            <li><a href="/">LOG-OUT</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-4">
+            <div class="row"> 
+                <div class="col-md-10 mb-4">
+                    <h3>Registration Your Pet</h3>
+                    {{#if message}}
+                        <h4 class="alert alert-danger mt-4">{{message}}</h4>
+                    {{/if}}
+                </div>
+            </div>
+            <form class="row g-2" action="/auth/addPetreg" method="POST">
+                
+                <!--USER ID-->
+                <div class="form-group mb-3 mt-3">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label for="petName" class="form-label">USER ID:</label>
+                            <input type="text" class="form-control" id="user_ID" name="user_ID" value='{{userData.userID}}' readonly>
+                        </div>
+                    </div>
+                </div>
+              
+
+                <!--PET NAME-->
+                <div class="form-group mb-3 mt-3">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label for="petName" class="form-label">Pet Name:</label>
+                            <input type="text" class="form-control" id="petName" name="petName">
+                        </div>
+                    </div>
+                </div>
+               
+                <!--PET GENDER-->
+                <div class="form-group mb-3 mt-3">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label for="petGender" class="form-label">Pet Gender:</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 d-flex justify-content-around">
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="petGender" id="petGender" value="Male">
+                                <label class="form-check-label" for="petGender">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="col-md-5">
+                                <input class="form-check-input" type="radio" name="petGender" id="petGender" value="Female">
+                                <label class="form-check-label" for="petGender">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+               
+                                   
+                <div class="form-group mb-4 mt-3">
+                    <!--PET BIRTHDATE-->
+                    <div class="row">
+                        <div class="col-md-5 mb-4">
+                            <label for="petBdate" class="form-label">Birthdate:</label>
+                            <input type="date" class="form-control" id="petBdate" name="petBdate">
+                        </div>
+                        <!--PET BREED-->
+                       <div class="col-md-5">
+                            <label for="petBreed" class="form-label">Pet Breed:</label>
+                            
+                                <select class="form-select text-end" id="petBreed" name="petBreed">
+                                    <option selected>Select the breed of your pet</option>
+                                    <option value="Maltese">MALTESE</option>
+                                    <option value="Shi-Tzu">SHI-TZU</option>
+                                    <option value="Doberman">DOBERMAN</option>
+                                    <option value="Pitbull">PITBULL</option>
+                                    <option value="Pug">PUG</option>
+                                    <option value="Persian Cat">PERSIAN CAT</option>
+                                    <option value="Bengal Cat">BENGAL CAT</option>
+                                    <option value="Siamese Cat">SIAMESE CAT</option>
+                                    <option value="Siberian Cat">SIBERIAN CAT</option>
+                                </select>
+                       </div>
+                    </div>
+                </div>
+
+                <!--BUTTON-->
+                <div class="row">
+                    <div class="col-md-10 mt-5 mb-3 d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary petReg">Register Pet</button>
+                    </div>
+                </div>
+                       
+                   
+                    
+                        
+                </form>
     
+
+        
+    </div><!--EOF Container FORM-->
+
+<!--BOOTSTRAP JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+
 </body>
 </html>

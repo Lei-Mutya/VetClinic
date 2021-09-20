@@ -4,36 +4,46 @@ body{
 }
 
 
-nav{
+.sidebar{
     background-color: #5C3D2E;
     color: #C68B59;
-    padding: 30px 60px;
-    display: flex;
-    justify-content: space-between;
+    
 }
 
-nav ul{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.sidebar a{
+    color:#C68B59;
 }
 
-nav li{
-    list-style:none;
-
+.sidebar a:focus{
+    color:#F037A5;
+}
+.sidebar a:hover{
+    color:white;
 }
 
-nav li a{
-    color: #C68B59;
-    text-decoration:none;
-    font-weight: bold;
-    padding: 5px 10px;
+
+
+
+.dropdown-toggle
+{
+    width: 78%!important;
 }
 
-nav li a:hover{
-    color: #F037A5;
+.petReg
+{
+    width: 200px;
+    height: 50px;
 }
-nav li a:active{
-    color: #00C1D4;
+
+.center
+{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
 }
+
+
+
+
 

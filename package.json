@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["VetMed Clinic", "Book Appointment", "Pet Registration"],
+  "author": "Soliel Jhon Jaime Jona",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,7 +20,7 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.12"
   },
-  "engines":{
+  "engines": {
     "node": "14.x"
   }
 }

@@ -14,20 +14,60 @@
     <title>Customer Page</title>
 </head>
 <body>
-
+ {{#each userData}}
     <nav>
         <h4>Fur and Tails Animal Care Clinic</h4>
+         
         <ul>
-            <li><a href="/customer">HOME</a></li>
-            <li><a href="/petreg">REGISTER YOUR PET</a></li>
+          
+            <li><a href="/auth/customer">HOME</a></li>
             <li><a href="/viewaccount">YOUR ACCOUNT</a></li>
+            <li><a href='/auth/petreg/{{this.userID}}'>ADD PET</a></li>
+            <li><a href="/">LOG-OUT</a></li>
+           
         </ul>
+        
     </nav>
 
     <div class="container">
         <div class="row mt-5">
             <div class="col">
                 <h1>CUSTOMER PAGE</h1>
+            </div>
+        </div>
+
+<section class='p-2 p-lg-0 pt-lg-5 mb-4'>
+      <div class='container mt-2'>
+        <h2 class='text-danger'>MY ACCOUNT</h2>
+       
+        <table class='table table-bordered table-dark'>
+          <thead class='thead-dark'>
+            <tr>
+              <th scope='col'>ID</th>
+              <th scope='col'>Firstname</th>
+              <th scope='col'>Lastname</th>
+              <th scope='col'>E-mail</th>
+            </tr>
+          </thead>
+          <tbody>
+           
+              <tr>
+                <th scope='row'>{{this.userID}}</th>
+                <td>{{this.firstname}}</td>
+                <td>{{this.lastname}}</td>
+                <td>{{this.email}}</td>
+              
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
+        <div class="row">
+            <div class="col">
+                <h4>Welcome</h4>
             </div>
         </div>
         <div class="row">
