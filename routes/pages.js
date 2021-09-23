@@ -19,5 +19,9 @@ router.get('/customer', (req,res)=>{
     res.render('customer');
 });
 
+router.get('/booking', (req,res)=>{
+    res.render('booking');
+});
+
 module.exports = router;
 
