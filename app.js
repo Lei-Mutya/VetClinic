@@ -52,6 +52,6 @@ app.use('/auth', require('./routes/auth'));
 
 
 
-app.listen(5000, ()=>{
-    console.log('Server started on P ort 5000');
+app.listen(3000, ()=>{
+    console.log('Server started on Port 3000');
 })

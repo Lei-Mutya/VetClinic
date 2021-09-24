@@ -1,6 +1,8 @@
 const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
+const cookie = require('cookie-parser');
 const bcrypt = require('bcryptjs'); 
+
 
 //start the database
 const db = mysql.createConnection({
@@ -13,56 +15,44 @@ const db = mysql.createConnection({
 
 //LOGIN
 exports.login = (req, res)=>{
-    const { email, password } = req.body;
-    db.query('SELECT * FROM users WHERE email = ? ', [email] , async function(error, results, fields){
-        if(error){
-            res.send({
-                "code":400,
-                "failed": "error occured"
-            })
+    const {email, password} = req.body;
+
+    if(!email || !password)
+    {
+        return res.status(400).render('login', {message: 'Please enter a valid Email and/or password'});
+    }
+
+    db.query('SELECT * FROM users where email = ?', [email], async(err, result)=>{
+        if(!result || !(await bcrypt.compare(password, result[0].password))){
+            console.log(err);
+            res.status(401).render('login', {message: 'email or password is incorrect!'});
         }
         else{
-            if(results.length>0){
-                const comparison = await bcrypt.compare(password, results[0].password)
-                if(comparison){
-                    /*res.send({
-                        "code":200,
-                        "success": "login successful!"
-                    })*/
-
-                    return res.render('customer', {
-                        message: 'Log-In Successful!'
-                    });
-                }
-                else{
-                    /*res.send({
-                        "code": 204,
-                        "success":"Email and password do not match"
-                    })*/
-
-                    return res.render('login', {
-                        message: 'Email and password do not match'
-                    });
-                }
+            const id = result[0].userID;
+            const token = jwt.sign({id}, process.env.JWT_SECRET, {expiresIn:process.env.JWT_EXPIRES_IN});
+            console.log(token);
+            const cookieOptions = {
+                expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+                httpOnly:true
             }
-            else{
-                /*res.send({
-                    "code": 206,
-                    "success": "Email does not exists"
-                });*/
+            res.cookie('jwt', token, cookieOptions);
+            //res.status(200.redirect('/'));
 
-                return res.render('login', {
-                    message: 'Email does not exist'
-                });
-            }
+           
+
+            db.query('SELECT * FROM users WHERE email = ?',[email], (err, results)=>{
+                if(err) throw err;
+                res.render('customer',{title: 'List of Accounts', userData : results});
+            });
+            //return res.render('login', {message: 'User Logged In'});
         }
     });
-}
+};
 
 
 
 
-//REGISTRATION
+//REGISTRATION CUSTOMERS
 exports.register = (req, res)=>{
     //request body what's coming from the registration form
     console.log(req.body);
@@ -119,3 +109,33 @@ exports.register = (req, res)=>{
 
     // /res.send('Form submitted');
 }
+
+
+
+
+//ADD PETS
+exports.petreg = (req,res)=>{
+    const userID = req.params.userID;
+    db.query('SELECT * FROM users WHERE userID = ?', [userID], (err,results)=>{
+        if(err) throw err;
+        res.render('petreg', {title:'Add Pets', userData: results[0]});
+    });
+};
+
+exports.addPetreg = (req,res)=>{
+    const { petName, petGender, petBdate, petBreed, user_ID} = req.body;
+    db.query('INSERT INTO pets SET ?', {petName: petName, petGender: petGender, petBdate: petBdate, petBreed: petBreed, userID: user_ID}, (err,results)=>{
+
+        if(err)
+        {
+            console.log(err);
+        }
+        else{
+            console.log(results);
+            return res.render('petreg', {
+                message: 'Pet Registered'
+            });
+        }
+    }); //EOF dbquery INSERT
+
+};
